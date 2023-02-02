@@ -2,34 +2,20 @@
 // This project specifies type: node in project.json, so all files run in nodejs mode by default
 "ui-thread ui nodejs";
 
-const fs = require("fs");
-const axios = require("axios");
-const util = require("util");
-const { requestScreenCapture } = require('media_projection');
-const imageUtil = require("./images.util")
-const fileUtil = require("./fileUtil")
-
-const { showToast } = require("toast");
-const console = require("console");
-const { accessibility, click, home, toggleRecents, swipe, longClick, press, performGesture, performGestures, StrokeDescription, back } = require('accessibility');
-
-const { delay, Deferred } = require("lang");
-const device = require('device');
-const { findImage } = require("image");
-const context = $autojs.androidContext;
-const work_manager = require("work_manager");
-const { createDatastore } = require('datastore');
-const app = require("app");
-const myWork = require("./work.js");
-const float_window = require("./float.node.js");
 const power_manager = require("power_manager");
 const ui = require('ui');
-const { myEngine } = require('engines');
 const path = require('path');
-const {
-    exec,
-    createShell
-} = require('shell');
+const { showToast } = require("toast");
+const console = require("console");
+const { accessibility } = require('accessibility');
+const { Deferred } = require("lang");
+const device = require('device');
+const work_manager = require("work_manager");
+const { createDatastore } = require('datastore');
+const myWork = require("./work.js");
+const float_window = require("./float.node.js");
+const fileUtil = require("./fileUtil")
+const config = require('./config/index.js')
 
 const plugins = require("plugins");
 
@@ -60,15 +46,14 @@ global.script_config = {
 
 // 默认参数
 const waitTime = 4000;
-global.token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX3JvbGUiOiJtZW1iZXIiLCJteV90aW1lIjoxNjczOTYzMzA3MTE2LCJ1c2VyX2lkIjoyLCJ1c2VyX3Bob25lIjoiMTgwMzU5MTgzNzEiLCJleHAiOjE2NzQwMDY1MDd9.aKY7bxo6kbvI0aXzfp7zdLSbK2afRPq_peyQ9PfLChYsHwST2VTjEPrREDUrigmct3_Trh26hf8zFCNbz7NzWw"
-global.baseUrl = "http://118.31.32.48:8080/"
+global.token = ""
+global.baseUrl = config.baseUrl
 global.appName = ""
 global.multipleAppName = ""
 global.startTime = ""
 global.status = "运行中"
 global.instanceNum = 0
 global.version = "1.0.0"
-
 
 
 async function main() {
@@ -80,22 +65,8 @@ async function main() {
         })
     }
 
-    // var thread = threads.start(function () {
-    //     while (true) {
-    //         log("子线程");
-
-    //     }
-    // });
-
-    const alipay = await plugins.load("com.alipay.sdk.pay.demo");
-    let res = await alipay.pay("dsadsadsad")
-    
-    console.log(res);
-    // console.log(await alipay.remoteAdd(1, 2));
-
-
-    // await float_window.main()
-    // ui.startActivity(WebActivity)
+    await float_window.main()
+    ui.startActivity(WebActivity)
 
 }
 
@@ -165,8 +136,6 @@ async function start() {
     fileUtil.sendLog()
 }
 
-
-
 // 显示Web的界面
 class WebActivity extends ui.Activity {
     get initialStatusBar() { return { color: '#ffffff', light: true } }
@@ -177,6 +146,7 @@ class WebActivity extends ui.Activity {
             <input id="phone" hint="请输入手机号" text="18035918371"/>
             <input id="pwd" hint="请输入密码" text="hzj123456"/>
             <button id="login" text="登录"/>
+            <button id="pay" text="支付"/>
             <webview id="web" w="*" h="*"/>
         </vertical>`
     }
@@ -187,10 +157,6 @@ class WebActivity extends ui.Activity {
         this.webview.on('console_message', (event, msg) => {
             console.log(`${path.basename(msg.sourceId())}:${msg.lineNumber()}: ${msg.message()}`);
         });
-        // getUrl.promise().then(url => {
-        //     console.log(`loadUrl:`, url);
-        //     this.webview.loadUrl(url);
-        // });
 
         this.loginBtn = contentView.findView('login');
         this.loginBtn.on('click', (event, msg) => {
@@ -212,30 +178,24 @@ class WebActivity extends ui.Activity {
                 start()
             })
         });
+
+        this.payBtn = contentView.findView('pay');
+        this.payBtn.on('click', (event, msg) => {
+            console.log(event, msg)
+            callAlipay()
+        })
     }
 }
 
-// 调试模式显示的加载与日志页面
-class LoadingActivity extends ui.Activity {
-    get initialStatusBar() { return { color: '#ffffff', light: true } }
+async function callAlipay(){
+    try{
+        const alipay = await plugins.load("com.alipay.sdk.pay.demo");
+        let res = await alipay.pay("dsadsadsad")
 
-    get layoutXml() {
-        return `
-<vertical>
-    <progressbar id="progressbar" indeterminate="true" style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"/>
-    <globalconsole id="console" w="*" h="*"/>
-</vertical>
-`
-    }
-
-    onCreate(savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 一旦url已准备好加载，就结束本页面
-        getUrl.promise().then(() => this.finish());
+        console.log(res)
+    }catch(e){
+        console.warn(2, e)
     }
 }
-
-
-
 
 main().catch(console.error);
