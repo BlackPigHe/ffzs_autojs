@@ -4,7 +4,7 @@ const ui = require('ui');
 const { showToast } = require("toast");
 require('rhino').install();
 const $java = $autojs.java
-$java.loadJar('../jar/alipaySdk-20180601.jar')
+$java.loadJar('../jar/alipaySdk-20180601.jar').catch(console.error);
 
 // const float_window = require("../float.node.js");
 const WebActivity = require("./web_ui.js")
@@ -15,4 +15,4 @@ async function main(){
     // 启动页面
     ui.setMainActivity(WebActivity);
 }
-main()
+main().catch(console.error);

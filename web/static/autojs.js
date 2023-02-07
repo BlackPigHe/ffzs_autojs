@@ -26,6 +26,7 @@
 
 //     "use strict";
 function initAutoJs(){
+    if(!(window.$autojs && window.$autojs.__sendEvent)) return;
     const EVENT_RESPONSE = "$autojs:internal:response:";
     const EVENT_REQUEST = "$autojs:internal:request";
     Object.setPrototypeOf($autojs, new events.EventEmitter());

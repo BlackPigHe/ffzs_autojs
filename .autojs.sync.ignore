@@ -1,5 +1,6 @@
-/build
-/web
-/node_modules
-/.DS_Store
-/.vscode
+build
+web
+.DS_Store
+.vscode
+.dist
+*.code-workspace
