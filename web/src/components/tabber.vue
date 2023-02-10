@@ -1,7 +1,6 @@
 <template>
     <div class="tabber">
-
-
+  
         <van-tabbar v-model="active" @change="qiehuan">
             <van-tabbar-item name="/index">
                 <template #icon="props">
@@ -102,5 +101,11 @@ export default {
 
 
 <style lang="less" scoped >
+
+.tabber{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
 </style>

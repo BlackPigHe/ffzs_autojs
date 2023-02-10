@@ -88,3 +88,19 @@ export function order(data){
     data: data
   })
 }
+
+// 查询使用模块
+
+//
+
+
+
+
+export function use_help(data) {
+  return request({
+    url:'/use_help/?pageNum=1&pageSize=1000',
+    method: 'GET',
+    data: data
+
+  })
+}

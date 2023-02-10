@@ -30,8 +30,8 @@
 		<div style="height:40px;"></div>
 		<div class="content">
 			<div style="text-align: center;">
-				<div class="wzzs"> 微赞助手 </div>
-				<div class="wzzspy"> weizanzhushou</div>
+				<div class="wzzs"> 峰峰助手 </div>
+				<div class="wzzspy"> fengfengzhushou</div>
 			</div>
 		</div>
 		<div style="height:75px;"></div>

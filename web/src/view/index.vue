@@ -16,16 +16,10 @@
                             视频阅读
                         </div>
                     </div>
-
                     <img v-if="navtap == 'false'" class="leftimgxz" src="../assets/img/xuanjiao.png" alt="">
-
                 </div>
-
                 <div style="width:4%;">
-
                 </div>
-
-
                 <div class="left" @click="navta('false')">
                     <div class="left-aut">
                         <img class="jticon" src="../assets/img/wz.png" alt="">
@@ -38,59 +32,45 @@
                     <img v-if="navtap == 'false'" class="leftimgxz" src="../assets/img/xuanjiao.png" alt="">
                 </div>
             </div>
-
             <div style="height:30px;"></div>
-
             <div class="itemdt">
-                起始时间~终止时间：
+                起始位置 ~ 终止位置：
                 <!-- <picker mode="time" :value="starttime" start="09:01" end="21:01" @change="bindTimeChangestarttime">
-				
 				</picker> -->
-
-                <div class="uni-input" style="width:45px;" @click="show = true">{{ starttime }}</div>
-
-
-                <van-action-sheet v-model="show">
+                <div class="uni-input" style="width:45px;" @click="show = true">
+                    <input style="width:100%;"  v-model="starttime"   type="number" placeholder="数量" maxlength="2">
+                    <!-- {{ starttime }} -->
+                </div>
+                <!-- <van-action-sheet v-model="show">
                     <div class="content">
 
-                        <van-datetime-picker v-model="currentTime" type="time" title="选择时间" :min-hour="0" :max-hour="23"
+                        <van-datetime-picker v-model="currentTime" type="time" title="" :min-hour="0" :max-hour="99"
                             @confirm="qued" @cancel="clis" />
-
                     </div>
-                </van-action-sheet>
-
-
-
+                </van-action-sheet> -->
                 <div style="text-align: center; width:50px; ">
                     至
                 </div>
-                <div class="uni-input" style="width:45px;" @click="shows = true">{{ endtime }}</div>
-
-
-
+                <div class="uni-input" style="width:45px;" @click="shows = true">
+                    
+                    <input style="width:100%;"   v-model="endtime"  type="number" placeholder="数量" maxlength="2">
+                    <!-- {{ endtime }} -->
+                
+                
+                </div>
+                <!-- 
                 <van-action-sheet v-model="shows">
                     <div class="content">
-
                         <van-datetime-picker v-model="currentTimes" type="time" title="选择时间" :min-hour="0"
                             :max-hour="23" @confirm="queds" @cancel="cliss" />
-
                     </div>
-                </van-action-sheet>
-
-
-
-
+                </van-action-sheet> -->
             </div>
             <div style="height:20px;"></div>
             <div class="itemdt">
                 视频阅读数量：
                 <div class="uni-input" style="width:40px;">
-
-
-
-
                     <input style="width:100%;" type="number" placeholder="数量" maxlength="4">
-
                 </div>
                 <div style="width:10px;"> </div>
                 文章阅读数量：
@@ -98,7 +78,6 @@
                     <input style="width:100%;" type="number" placeholder="数量" maxlength="4">
                 </div>
             </div>
-
         </div>
         <div style="height:20px;"></div>
         <div class="top"></div>
@@ -107,14 +86,10 @@
             <div class="leftti">
                 <div style="width:20px;">
                 </div>
-
                 <img style="width:44px;" src="../assets/img/tx.png" alt="">
-
-
                 <div class="xjdk">
                     星级多开
                 </div>
-
                 <img style="width:15px;" src="../assets/img/xuanzhong.png" alt="">
 
             </div>
@@ -195,7 +170,7 @@
                     </div>
 
                     <div class="uni-input" style="width:45px;">
-                        <input type="number" placeholder="数量" maxlength="4">
+                        <input type="number" placeholder="次数" maxlength="4">
                     </div>
 
                 </div>
@@ -256,11 +231,11 @@
 
 
                 <div class="uni-input" style="width:40px;">
-                    <input type="number" placeholder="数量" maxlength="3">
+                    <input type="number" placeholder="时" maxlength="3">
                 </div>
                 <div style="width:7px;"> </div>
                 <div class="uni-input" style="width:40px;">
-                    <input type="number" placeholder="数量" maxlength="3">
+                    <input type="number" placeholder="分" maxlength="3">
                 </div>
 
 
@@ -279,7 +254,7 @@
                 </div>
                 <div class="botright">
                     <div class="uni-input" style="width:60px;">
-                        <input type="number" placeholder="数量" maxlength="3">
+                        <input type="number" placeholder="时" maxlength="3">
                     </div>
                     <div style="width:15px;"> </div>
                     <div class="antl" @click="yuedumingxi()">
@@ -330,7 +305,7 @@
         </div>
 
         <div style="height: 100px;"></div>
-        <navbar :active="active"></navbar>
+        <navbar style="border:2px solid #000;" :active="active"></navbar>
 
     </div>
 </template>
@@ -367,19 +342,17 @@ export default {
 
             navtap: 'false',
 
-            starttime: '始',
-            endtime: '终'
+            starttime:'',
+            endtime:''
 
 
         }
     },
     methods: {
 
-        qiehuan: function (e) {
-            console.log(e)
-
-
-        },
+        // qiehuan: function (e) {
+        //     console.log(e)
+        // },
 
 
         Jumppage: function (e) {
@@ -389,39 +362,27 @@ export default {
             })
         },
 
-        qued: function (e) {
-            console.log(e, "ddd")
-            this.starttime = e
-            this.show = false
-
-            // debugger
-
-        },
-
-        clis: function () {
-            // debugger
-            this.show = false
-        },
-
-
-
-        queds: function (e) {
-            console.log(e, "ddd")
-            this.endtime = e
-            this.shows = false
-
-            // debugger
-
-        },
-
-        cliss: function () {
-            // debugger
-            this.shows = false
-        },
-
-
-
-
+        // qued: function (e) {
+        //     console.log(e, "ddd")
+        //     debugger
+        //     this.starttime = e
+        //     this.show = false
+        //     // debugger
+        // },
+        // clis: function () {
+        //     // debugger
+        //     this.show = false
+        // },
+        // queds: function (e) {
+        //     console.log(e, "ddd")
+        //     this.endtime = e
+        //     this.shows = false
+        //     // debugger
+        // },
+        // cliss: function () {
+        //     // debugger
+        //     this.shows = false
+        // },
 
         // 阅读明细
         yuedumingxi: function () {

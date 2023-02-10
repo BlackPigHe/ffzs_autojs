@@ -5,16 +5,12 @@
     <div class="bodyauto">
       <div class="topname">
         <div style="width:40px;"></div>
-        微赞助手
+        峰峰助手
       </div>
-
-
-
       <div class="autoo">
         <div style="height: 35px;"></div>
         <div class="neirngs">
           <div class="hylogin">
-
             <div v-if="logintype == true">欢迎登录</div>
             <!-- <div v-if="logintype == true">欢迎登录 </div> -->
             <div v-else>注册 </div>
@@ -46,9 +42,6 @@
             </div>
           </div>
 
-
-
-
           <div class="inpubj" v-if="logintype == false">
             <div class="inputnei">
               <input v-model="password" type="password" maxlength="11" placeholder="请输入密码">
@@ -62,14 +55,6 @@
             </div>
 
           </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -199,7 +184,7 @@ export default {
             initAutoJs()
             setTimeout(() => {
               // 跳转首页
-              this.Jumppage('/my')
+              this.$router.replace('/index')
             }, 1300)
           }
         })
@@ -252,7 +237,11 @@ export default {
             localStorage.setItem('token', res.data.token);
             setTimeout(() => {
               // 跳转首页
-              this.Jumppage('/index')
+
+
+              this.$router.replace('/index')
+
+
             }, 1300)
           }
         })
@@ -307,6 +296,10 @@ export default {
     },
     // 登录 注册接口
     dengluzc: function () {
+
+
+
+
       // 账号密码
       if (this.logintype) {
 
@@ -337,6 +330,7 @@ export default {
 
 
 
+        var that = this
 
         var data = {
           // 验证码
@@ -352,18 +346,25 @@ export default {
 
 
         register(data).then(res => {
-          console.log(res,"6666")
-        if (res.code == 200) {
-          Toast('注册成功');
+          console.log(res, "6666")
+          if (res.code == 200) {
+            Toast('注册成功,请登录');
+
+
+            clearInterval(that.smsInterval)
+
+            setTimeout(() => {
+              that.logintype = true
+            }, 1000)
 
 
 
-        
-        }
-      })
-        .catch(error => {
-          console.log(error, "errosr")
+
+          }
         })
+          .catch(error => {
+            console.log(error, "errosr")
+          })
 
 
 
@@ -451,31 +452,15 @@ export default {
 
 
 
-
-      // // return
-      // this.$request({
-      //   url: '/user/valid_code?phoneNum=' + this.phone,
-      // }).then(res => {
-      //   console.log(res)
-      //   if (res.code == '200') {
-      //     // uni.showToast({
-      //     //   // icon: 'none',
-      //     //   title: res.message
-      //     // })
-      //   Toast('');
-      //   }
-      // })
-
-
-
-
-
       that.smsWait = 60
       that.waitSms()
       that.smsInterval = setInterval(function () {
         that.waitSms()
       }, 1000)
     },
+
+
+
 
 
 
@@ -647,7 +632,7 @@ export default {
   font-weight: 500;
   line-height: 16px;
 
-  margin-top: 170px;
+  margin-top:150px;
 
 
   color: #9CA4B5;

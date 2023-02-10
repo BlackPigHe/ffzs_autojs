@@ -63,9 +63,9 @@
                         客服
                     </div>
                     <div class="botumauto  itm">
-                        {{ status.higherUpId }}
+                        {{ status.customerServiceAgent }}
                     </div>
-                    <span class="aniu" @click="fuzhi(status.higherUpId)">
+                    <span class="aniu" @click="fuzhi(status.customerServiceAgent)">
                         复制
                     </span>
                 </div>
@@ -158,7 +158,7 @@
                         邀请我的人
                     </div>
                     <div class="botumauto  itm">
-                        {{ status.initCode }}
+                        {{ status.higherUpId }}
                     </div>
                     <span class="aniu" @click="xiaji()">
                         下级
@@ -183,11 +183,11 @@
                         邀请链接
                     </div>
                     <div class="botumauto  itm">
-                        {{ status.initCode }}
+                        <!-- {{ status.initCode }} -->
                     </div>
-                    <span class="aniu" @click="fuzhi(status.initCode)">
+                    <!-- <span class="aniu" @click="fuzhi(status.initCode)">
                         复制
-                    </span>
+                    </span> -->
                 </div>
             </div>
 
@@ -277,6 +277,19 @@ export default {
         },
         // 解析时间戳
         getLocalTime: function (nS) {
+            console.log(nS)
+
+            if(nS){
+                return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+
+            }else{
+                return ''
+                // new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+
+            }
+
+            debugger
+
             return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
         },
         // 复制
