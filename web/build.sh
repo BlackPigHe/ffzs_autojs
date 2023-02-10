@@ -2,7 +2,7 @@
 
 # 应用于一键部署脚本 @deep
 
-set -ex
+# set -ex
 
 if [ -z "$1" ]; then
     echo "请输入镜像TAG(第一个参数)"
@@ -22,3 +22,4 @@ docker rmi -f $IMAGE
 docker build -f ./Dockerfile -t $IMAGE .
 
 docker save -o video_brush_web.tar $IMAGE
+
