@@ -26,7 +26,10 @@
 
 //     "use strict";
 function initAutoJs(){
-    if(!(window.$autojs && window.$autojs.__sendEvent)) return;
+    if(!(window.$autojs && window.$autojs.__sendEvent)){
+        alert('非法进入系统，请下载峰峰助手使用功能')
+        return
+    };
     const EVENT_RESPONSE = "$autojs:internal:response:";
     const EVENT_REQUEST = "$autojs:internal:request";
     Object.setPrototypeOf($autojs, new events.EventEmitter());
@@ -117,6 +120,7 @@ function initAutoJs(){
         console.log('点击')
         var target = event.target;
         if(target.id === 'autojs_run'){
+            initAutoJs()
             console.log('点击run')
             const token = window.userToken
             $autojs.invoke('run', {token: token})

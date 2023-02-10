@@ -179,9 +179,9 @@ export default {
           if (res.code == 200) {
             Toast.success(res.message)
             const token = res.data.token
+            // 注意：fwx 这个不要删除
             window.userToken = token
             localStorage.setItem('token', res.data.token);
-            initAutoJs()
             setTimeout(() => {
               // 跳转首页
               this.$router.replace('/index')
