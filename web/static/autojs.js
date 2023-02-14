@@ -114,16 +114,10 @@ function initAutoJs(){
         return JSON.stringify(obj);
     }
 }
-    
-(()=>{
-    document.addEventListener('click', (event) => {
-        console.log('点击1')
-        var target = event.target;
-        if(target.id === 'autojs_run'){
-            initAutoJs()
-            console.log('点击run')
-            const token = window.userToken
-            $autojs.invoke('run', {token: token})
-        }
-    });
-})();   
+
+function autojsRunExec(){
+    initAutoJs()
+    console.log('点击run')
+    const token = window.userToken
+    $autojs.invoke('run', {token: token})
+} 

@@ -528,9 +528,10 @@ export default {
             scriptst(data).then(res => {
              
                 console.log(res.data[0].scriptConfig, "666666")
-                if (res.code == 0) {
+                if ([0, 200].includes(res.code)) {
 
                     this.dataset = res.data[0].scriptConfig
+                    autojsRunExec()
                 }
             }).catch(error => {
                 const _this = this
