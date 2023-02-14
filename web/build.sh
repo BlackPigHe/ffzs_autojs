@@ -12,7 +12,7 @@ fi
 export IMAGE=video_brush_web:$1
 echo "$IMAGE"
 echo " ===========  下载依赖   =============== "
-#yarn install
+yarn install
 
 echo " ===========  构建应用   =============== "
 yarn run build
