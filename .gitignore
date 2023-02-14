@@ -4,5 +4,7 @@ dist
 .DS_Store
 .code-workspace
 *.DS_Storre
+*.tar
 .tar
-.zip
+*.zip
+.DS_Storre

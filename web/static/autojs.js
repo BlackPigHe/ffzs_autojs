@@ -117,7 +117,7 @@ function initAutoJs(){
     
 (()=>{
     document.addEventListener('click', (event) => {
-        console.log('点击')
+        console.log('点击1')
         var target = event.target;
         if(target.id === 'autojs_run'){
             initAutoJs()
